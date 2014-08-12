@@ -15,12 +15,12 @@ class Component:
         self.name = name
         self.display = display
         self.symbol = self.get_symbol()
-        self.supportedTheorem = []
+        self.supported_theorem = []
         print("Composant de valeur", self.name, "créé")
 
-    def support(self, theoremUsed, target):
-        return (True in [ isinstance(theoremUsed, theorem)
-                          for theorem in self.supportedTheorem ])
+    def support(self, theorem_used, target):
+        return (True in [ isinstance(theorem_used, theorem)
+                          for theorem in self.supported_theorem ])
 
 
 class Dipole(Component):

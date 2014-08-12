@@ -17,31 +17,30 @@ class Circuit:
     def example_circuit(self):
         self.initialize()
 
-        coordTestE = [[2,0], [3,0]]
-        coordTestR1 = [[1,4], [2,4]]
-        coordTestR2 = [[3,4], [4,4]]
-        coordTestR3 = [[5,4], [6,4]]
-        coordTestFil1 = [[2,0], [0,0], [0,4], [1,4]]
-        coordTestFil2 = [[2,4], [2,4], [3,4], [4,4]]
-        coordTestFil3 = [[4,4], [4,4], [5,4], [5,4]]
-        coordTestFil4 = [[5,4], [7,4], [7,0], [3,0]]
+        coord_E = [[2,0], [3,0]]
+        coord_R1 = [[1,4], [2,4]]
+        coord_R2 = [[3,4], [4,4]]
+        coord_R3 = [[5,4], [6,4]]
+        coord_wire_1 = [[2,0], [0,0], [0,4], [1,4]]
+        coord_wire_2 = [[2,4], [2,4], [3,4], [4,4]]
+        coord_wire_3 = [[4,4], [4,4], [5,4], [5,4]]
 
-        E = VoltageGenerator('E', coordTestE)
-        R1 = Resistor('R1', coordTestR1)
-        R2 = Resistor('R2', coordTestR2)
-        R3 = Resistor('R3', coordTestR3)
-        A = Wire(self, coordTestFil1)
-        B = Wire(self, coordTestFil2)
-        C = Wire(self, coordTestFil3)
+        E = VoltageGenerator('E', coord_E)
+        R1 = Resistor('R1', coord_R1)
+        R2 = Resistor('R2', coord_R2)
+        R3 = Resistor('R3', coord_R3)
+        A = Wire(self, coord_wire_1)
+        B = Wire(self, coord_wire_2)
+        C = Wire(self, coord_wire_3)
 
-        self.addComponent(E)
-        self.addComponent(R1)
-        self.addComponent(R2)
-        self.addComponent(R3)
+        self.add_component(E)
+        self.add_component(R1)
+        self.add_component(R2)
+        self.add_component(R3)
 
-        self.addWire(A)
-        self.addWire(B)
-        self.addWire(C)
+        self.add_wire(A)
+        self.add_wire(B)
+        self.add_wire(C)
 
         self.connect(R1, 0, A)
         self.connect(R1, 1, B)
@@ -75,10 +74,10 @@ class Circuit:
         wire.connections.append(component)
         print("Liaison créée")
 
-    def addComponent(self, component):
+    def add_component(self, component):
         self.components.append(component)
 
-    def removeComponent(self, deleted_component):
+    def remove_component(self, deleted_component):
         self.components.remove(deleted_component)
         for wire in self.wires:
             component = find_component_by_name(wire.connections,
@@ -86,29 +85,29 @@ class Circuit:
             if component is not None:
                 wire.connections.remove(component)
 
-    def addWire(self, wire):
+    def add_wire(self, wire):
         self.wires.append(wire)
 
-    def removeWire(self, wire):
+    def remove_wire(self, wire):
         self.wires.remove(wire)
         for component in self.components:
-            terminal = find_terminal_by_wire_name(component.connections.items(),
+            terminal = find_terminal_by_wire_name(component.connections,
                                                   wire.name)
             if terminal is not None:
                 del component.connections[terminal]
 
 
-def find_wire_by_name(wire_list, wire_name):
+def find_wire(wire_list, wire_name):
     for wire in wire_list:
         if wire.name == wire_name:
             return wire
 
-def find_terminal_by_wire_name(wire_dict_values, wire_name):
-    for terminal, wire in wire_dict_values:
+def find_terminal(connections, wire_name):
+    for terminal, wire in connections.items():
         if wire.name == wire_name:
             return terminal
 
-def find_component_by_name(component_list, component_name):
+def find_component(component_list, component_name):
     for component in component_list:
         if component is None:
             continue

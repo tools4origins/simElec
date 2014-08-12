@@ -2,7 +2,6 @@ from sympy import Eq
 
 from src.component_structures import *
 
-
 class Theorem:
     def support(self, target):
         if not isinstance(target, self.target_class):
@@ -37,13 +36,13 @@ class MillmanTheorem(Theorem):
     def millman_term(self, wire, component):
         if wire in component.connections:
             if wire == component.connections[0]:
-                oppositeWire = component.connections[1]
+                opposite_wire = component.connections[1]
             elif wire == component.connections[1]:
-                oppositeWire = component.connections[0]
+                opposite_wire = component.connections[0]
             else:
                 raise Exception("Millman ne peut pas s'appliquer à cette borne")
 
-            return oppositeWire.symbol / component.symbol
+            return opposite_wire.symbol / component.symbol
         else:
             raise Exception("Recherche d'un terme de millman "
                              "pour un composant ne touchant pas le fil")

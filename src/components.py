@@ -5,7 +5,7 @@ from src.theorems import *
 class Resistor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
-        self.supportedTheorem.append(MillmanTheorem)
+        self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
         return Symbol(self.name)
@@ -14,7 +14,7 @@ class Resistor(Dipole):
 class Inductor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
-        self.supportedTheorem.append(MillmanTheorem)
+        self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
         return I*Symbol(self.name)*Symbol('w')
@@ -23,7 +23,7 @@ class Inductor(Dipole):
 class Capacitor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
-        self.supportedTheorem.append(MillmanTheorem)
+        self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
         return 1 / (I*Symbol(self.name)*Symbol('w'))
@@ -32,7 +32,7 @@ class Capacitor(Dipole):
 class VoltageGenerator(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
-        self.supportedTheorem.append(TerminalRelation)
+        self.supported_theorem.append(TerminalRelation)
 
     def get_symbol(self):
         return Symbol(self.name)

@@ -28,63 +28,63 @@ class CLI():
             "12 : Nouveau circuit\n"
             "13 : Simuler !\n")
             
-            userInput = input()
-            if userInput == '0':
+            user_input = input()
+            if user_input == '0':
                 break
 
-            elif userInput == '1':
+            elif user_input == '1':
                 name = self.prompt("Comment souhaitez-vous nommer "
                                    "la tension de votre générateur ?")
                 generator = VoltageGenerator(name)
-                self.circuit.addComponent(generator)
+                self.circuit.add_component(generator)
 
-            elif userInput == '2':
+            elif user_input == '2':
                 name = self.prompt("Comment souhaitez-vous nommer "
                                    "la valeur de votre résistance ?")
                 resistor = Resistor(name)
-                self.circuit.addComponent(resistor)
+                self.circuit.add_component(resistor)
 
-            elif userInput == '3':
+            elif user_input == '3':
                 name = self.prompt("Comment souhaitez-vous nommer "
                                    "l'inductance de votre bobine ?")
                 inductor = Inductor(name)
-                self.circuit.addComponent(inductor)
+                self.circuit.add_component(inductor)
 
-            elif userInput == '4':
+            elif user_input == '4':
                 name = self.prompt("Comment souhaitez-vous nommer "
                                    "la capacité de votre condensateur ?")
                 capacitor = Capacitor(name)
-                self.circuit.addComponent(capacitor)
+                self.circuit.add_component(capacitor)
 
-            elif userInput == '5':
+            elif user_input == '5':
                 wire = Wire(self.circuit, [])
-                self.circuit.addWire(wire)
+                self.circuit.add_wire(wire)
 
-            elif userInput == '6':
+            elif user_input == '6':
                 wire_name = self.prompt("Quel est le nom du fil ?")
                 wire = find_wire_by_name(self.circuit.wires, wire_name)
                 component_name = self.prompt("Quel est le nom du composant ?")
                 component = find_component_by_name(self.circuit.components,
                                                    component_name)
-                terminal = self.promptNumber("Sur quel borne du composant ?")
+                terminal = self.prompt_number("Sur quel borne du composant ?")
                 if wire is not None and component is not None:
                     self.circuit.connect(component, terminal, wire)
 
-            elif userInput == '7':
+            elif user_input == '7':
                 name = self.prompt("Quel est le nom du composant à supprimer ?")
                 component = find_component_by_name(self.circuit.components,
                                                    name)
-                self.circuit.removeComponent(component)
+                self.circuit.remove_component(component)
 
-            elif userInput == '8':
+            elif user_input == '8':
                 wire_name = self.prompt("Quel est le nom du fil à supprimer ?")
                 wire = find_wire_by_name(self.circuit.wires, wire_name)
-                self.circuit.removeWire(wire)
+                self.circuit.remove_wire(wire)
 
-            elif userInput == '9':
-                self.circuit=Circuit()
+            elif user_input == '9':
+                self.circuit = Circuit()
                 
-            elif userInput == '10':
+            elif user_input == '10':
                 for wire in self.circuit.wires:
                     self.display("Fil", wire.name, "lié à",
                                   [ component.name 
@@ -96,14 +96,14 @@ class CLI():
                                     for wire in component.connections 
                                     if wire is not None ])
                 
-            elif userInput == '11':
+            elif user_input == '11':
                 self.circuit.example_circuit()
 
-            elif userInput == '12':
+            elif user_input == '12':
                 self.circuit.initialize()
 
-            elif userInput == '13':
-                self.simulation=Simulation(self.circuit)
+            elif user_input == '13':
+                self.simulation = Simulation(self.circuit)
 
     def prompt(self, text):
         while True:
@@ -112,7 +112,7 @@ class CLI():
             if arg != '':
                 return arg
 
-    def promptNumber(self, text):
+    def prompt_number(self, text):
         while True:
             self.display(text)
             arg = input()
