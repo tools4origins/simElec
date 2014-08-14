@@ -33,7 +33,7 @@ class Dipole(Component):
     def __init__(self, name, display):
         Component.__init__(self, name, display)
         self.connections = [None] * 2
-    
+
     def add_connections(self, wire, terminal):
         if terminal in range(2):
             if (self.connections[terminal] is not None and

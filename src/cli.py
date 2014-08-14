@@ -27,7 +27,7 @@ class CLI():
             "11 : Utiliser le circuit d'exemple.\n"
             "12 : Nouveau circuit\n"
             "13 : Simuler !\n")
-            
+
             user_input = input()
             if user_input == '0':
                 break
@@ -83,19 +83,19 @@ class CLI():
 
             elif user_input == '9':
                 self.circuit = Circuit()
-                
+
             elif user_input == '10':
                 for wire in self.circuit.wires:
                     self.display("Fil", wire.name, "lié à",
-                                  [ component.name 
+                                  [ component.name
                                     for component in wire.connections ])
 
                 for component in self.circuit.components:
                     self.display("Composant", component.name, "lié à",
-                                  [ wire.name 
-                                    for wire in component.connections 
+                                  [ wire.name
+                                    for wire in component.connections
                                     if wire is not None ])
-                
+
             elif user_input == '11':
                 self.circuit.example_circuit()
 

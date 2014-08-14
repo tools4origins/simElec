@@ -56,7 +56,7 @@ class Circuit:
 
     def generate_wire_name(self):
         alphabet = ascii_letters[26:]
-        
+
         num = self._wires_named
         name = alphabet[num % 26]
 
