@@ -9,6 +9,12 @@ class Wire:
         self.symbol = Symbol("P_" + self.name)
         print('Fil nommé', self.name, 'créé')
 
+    def merge(self, wire):
+        self.connections += wire.connections
+        self.display += wire.display
+        for component in wire.connections:
+            component.connections = [ self if w == wire else w
+                                      for w in component.connections ]
 
 class Component:
     def __init__(self, name, display):
@@ -29,8 +35,13 @@ class Dipole(Component):
         self.connections = [None] * 2
     
     def add_connections(self, wire, terminal):
-        if(terminal in range(2)):
-            if self.connections[terminal] is not None:
-                print("Erreur : deux fils sur la même borne, non supporté")
+        if terminal in range(2):
+            if (self.connections[terminal] is not None and
+                    self.connections[terminal] != wire):
+                print("Attention : deux fils sur la même borne.\n"
+                      "Fil", wire.name, "supprimé")
+                self.connections[terminal].merge(wire)
+                wire.circuit.wires.remove(wire)
             else:
                 self.connections[terminal] = wire
+

@@ -70,7 +70,6 @@ class Circuit:
 
     def connect(self, component, terminal, wire):
         component.add_connections(wire, terminal)
-
         wire.connections.append(component)
         print("Liaison créée")
 
@@ -80,7 +79,7 @@ class Circuit:
     def remove_component(self, deleted_component):
         self.components.remove(deleted_component)
         for wire in self.wires:
-            component = find_component_by_name(wire.connections,
+            component = Circuit.find_component(wire.connections,
                                                deleted_component.name)
             if component is not None:
                 wire.connections.remove(component)
@@ -91,26 +90,25 @@ class Circuit:
     def remove_wire(self, wire):
         self.wires.remove(wire)
         for component in self.components:
-            terminal = find_terminal_by_wire_name(component.connections,
+            terminal = Circuit.find_terminal(component.connections,
                                                   wire.name)
             if terminal is not None:
                 del component.connections[terminal]
 
+    def find_wire(wire_list, wire_name):
+        for wire in wire_list:
+            if wire.name == wire_name:
+                return wire
 
-def find_wire(wire_list, wire_name):
-    for wire in wire_list:
-        if wire.name == wire_name:
-            return wire
+    def find_terminal(connections, wire_name):
+        for terminal, wire in connections.items():
+            if wire.name == wire_name:
+                return terminal
 
-def find_terminal(connections, wire_name):
-    for terminal, wire in connections.items():
-        if wire.name == wire_name:
-            return terminal
+    def find_component(component_list, component_name):
+        for component in component_list:
+            if component is None:
+                continue
 
-def find_component(component_list, component_name):
-    for component in component_list:
-        if component is None:
-            continue
-
-        if component.name == component_name:
-            return component
+            if component.name == component_name:
+                return component

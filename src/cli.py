@@ -62,9 +62,9 @@ class CLI():
 
             elif user_input == '6':
                 wire_name = self.prompt("Quel est le nom du fil ?")
-                wire = find_wire_by_name(self.circuit.wires, wire_name)
+                wire = Circuit.find_wire(self.circuit.wires, wire_name)
                 component_name = self.prompt("Quel est le nom du composant ?")
-                component = find_component_by_name(self.circuit.components,
+                component = Circuit.find_component(self.circuit.components,
                                                    component_name)
                 terminal = self.prompt_number("Sur quel borne du composant ?")
                 if wire is not None and component is not None:
@@ -72,13 +72,13 @@ class CLI():
 
             elif user_input == '7':
                 name = self.prompt("Quel est le nom du composant à supprimer ?")
-                component = find_component_by_name(self.circuit.components,
+                component = Circuit.find_component(self.circuit.components,
                                                    name)
                 self.circuit.remove_component(component)
 
             elif user_input == '8':
                 wire_name = self.prompt("Quel est le nom du fil à supprimer ?")
-                wire = find_wire_by_name(self.circuit.wires, wire_name)
+                wire = Circuit.find_wire(self.circuit.wires, wire_name)
                 self.circuit.remove_wire(wire)
 
             elif user_input == '9':
