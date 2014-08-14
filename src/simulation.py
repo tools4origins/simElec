@@ -1,4 +1,4 @@
-from sympy import *
+from sympy import Eq, solve
 
 from src.circuit import *
 from src.theorems import *
