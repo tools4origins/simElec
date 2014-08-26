@@ -1,5 +1,6 @@
-from string import ascii_letters
+import json
 
+from string import ascii_letters
 from sympy import Symbol
 
 from src.components import *
@@ -7,7 +8,6 @@ from src.components import *
 class Circuit:
     def __init__(self):
         self.initialize()
-        print("Circuit créé avec succès")
 
     def initialize(self):
         self.components = []
@@ -71,7 +71,6 @@ class Circuit:
     def connect(self, component, terminal, wire):
         component.add_connections(wire, terminal)
         wire.connections.append(component)
-        print("Liaison créée")
 
     def add_component(self, component):
         self.components.append(component)
@@ -112,3 +111,10 @@ class Circuit:
 
             if component.name == component_name:
                 return component
+
+    def save(self):
+        print(json.dumps(self))
+
+    def load(self, json_string):
+        for key, value in json_string:
+            self[key] = value

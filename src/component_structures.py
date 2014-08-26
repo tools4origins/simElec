@@ -7,7 +7,6 @@ class Wire:
         self.connections = []
         self.name = self.circuit.generate_wire_name()
         self.symbol = Symbol("P_" + self.name)
-        print('Fil nommé', self.name, 'créé')
 
     def merge(self, wire):
         self.connections += wire.connections
@@ -22,11 +21,20 @@ class Component:
         self.display = display
         self.symbol = self.get_symbol()
         self.supported_theorem = []
-        print("Composant de valeur", self.name, "créé")
+        self.type = "inconnu"
 
     def support(self, theorem_used, target):
         return (True in [ isinstance(theorem_used, theorem)
                           for theorem in self.supported_theorem ])
+
+    @property
+    def connections(self):
+        return self._connections
+
+    @connections.setter
+    def connections(self, value):
+        self._connections = value
+
 
 
 class Dipole(Component):

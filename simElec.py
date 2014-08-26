@@ -3,4 +3,3 @@
 from src.cli import CLI
 
 interface = CLI()
-interface.launch()

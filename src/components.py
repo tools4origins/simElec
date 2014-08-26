@@ -5,6 +5,7 @@ from src.theorems import *
 class Resistor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
+        self.type = "Résistance"
         self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
@@ -14,6 +15,7 @@ class Resistor(Dipole):
 class Inductor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
+        self.type = "Bobine"
         self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
@@ -23,6 +25,7 @@ class Inductor(Dipole):
 class Capacitor(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
+        self.type = "Condensateur"
         self.supported_theorem.append(MillmanTheorem)
 
     def get_symbol(self):
@@ -32,6 +35,7 @@ class Capacitor(Dipole):
 class VoltageGenerator(Dipole):
     def __init__(self, name, display=[]):
         Dipole.__init__(self, name, display)
+        self.type = "Générateur de tension"
         self.supported_theorem.append(TerminalRelation)
 
     def get_symbol(self):
